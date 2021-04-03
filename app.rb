@@ -23,6 +23,7 @@ before '/secure/*' do
   unless session[:identity]
     session[:previous_url] = request.path
     @error = 'Sorry, you need to be logged in to visit ' + request.path
+    
     halt erb(:login_form)
   end
 end
@@ -63,7 +64,6 @@ post '/cart' do
   @items.each do |item|
     item[0] = Product.find(item[0])
   end
-
 
   erb :cart
 end
